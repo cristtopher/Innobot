@@ -82,7 +82,7 @@ def sendmail(User, Message):
     mailServer.ehlo()
     mailServer.starttls()
     mailServer.ehlo()
-    mailServer.login("cquintana@innovex.cl","Cr15770ph3r!!")
+    mailServer.login("cquintana@innovex.cl","xxxxxx")
     mailServer.sendmail("cquintana@innovex.cl", "cquintana@innovex.cl", msg.as_string())
     mailServer.close()
 
