@@ -15,30 +15,39 @@ def commands(Message, Status):
     if Status == 'SENT' or (Status == 'RECEIVED'): 
         heuristic(Message.Id, Message.FromHandle, Message.Body, Message.Datetime)
         logging.info(Message.Body)
-        if Message.Body == "!ping":
+        if Message.Body == "!?":
+            alive(Message)
+        elif "!ip" in Message.Body:
+            searchip(Message)
+        elif "!ping" in Message.Body:
             ping(Message)
-        elif Message.Body =="!ip":
-            searchip(Message.Body)
         elif "buenos dias" in Message.Body:
             greet(Message)
         elif "hola" in Message.Body:
-            greet(Message)
+            greet()
         else:
             pass
     else:
         pass
 
 
-def ping(Message):
-    Message.Chat.SendMessage('Yes, I\'m still alive. :)')
+def alive(Message):
+    Message.Chat.Sendsendwhatapp()
     print "Ping Command Received \n"
 
 
-def greet(Message):
+def ping(Message):
+    Message.Chat.SendMessage('Centro Online')
+    print "Ping Command Received \n"
+
+
+def greet():
     #Message.Chat.SendMessage('Hola buenas, Cristtopher por aca, Jefe Soporte Tecnico')
     Message.Chat.SendMessage('Hola, que tal')
     #Message.Chat.SendMessage('en que te puedo ayudar?')
     print "Greeting Received!.\n"
+    sendwhatapp('Greeting Received!.')
+    
 
 
 def cmd_dice(Message):
@@ -56,7 +65,7 @@ def heuristic(Id, User, Message, Date):
     try:
         if User != 'cristtopher_quintana':
             sendmail(User, Message)
-            # sendwhatapp(Message)
+            sendwhatapp(Message)
             connection = sqlite3.connect(Path + 'memory.db')
             cursor = connection.cursor()
             cursor.execute("insert into messages(id, user, body, date) values (%i,'%s','%s','%s')" % (Id, User, Message, Date))
@@ -68,7 +77,8 @@ def heuristic(Id, User, Message, Date):
 
 
 def searchip(Message):
-    pass
+    print "IP Command Received \n"
+    Message.Chat.SendMessage('la ip es: ')
 
 
 def sendmail(User, Message):
@@ -82,19 +92,19 @@ def sendmail(User, Message):
     mailServer.ehlo()
     mailServer.starttls()
     mailServer.ehlo()
-    mailServer.login("cquintana@innovex.cl","xxxxxx")
+    mailServer.login("cquintana@innovex.cl","xxxx")
     mailServer.sendmail("cquintana@innovex.cl", "cquintana@innovex.cl", msg.as_string())
     mailServer.close()
 
 
-# def sendwhatapp(Message):
-#     password = "356521053468109"                      #Password dada al registrar el numero.
-#     password = base64.b64decode(bytes(password.encode('utf-8')))   #Codificacion de Password para envio a los servidores de whatsApp.
-#     username = '56962365854'                                     #Numero de telefono para el inicio de secion.
-#     keepAlive= False                                               #Conexion persistente con el servidor.
-#     #......................................................................
-#     whats = WhatsappEchoClient("+56962365854", Message, keepAlive)     #Inicia el cliente para el envio de mensajes por WhatsApp.
-#     whats.login(username, password)  
+def sendwhatapp(Message):
+    password = "cpL+ocV0i+V65/L0uO/7pR9XJLU="                      #Password dada al registrar el numero.
+    password = base64.b64decode(bytes(password.encode('utf-8')))   #Codificacion de Password para envio a los servidores de whatsApp.
+    username = '56962365854'                                       #Numero de telefono para el inicio de secion.
+    keepAlive= False                                               #Conexion persistente con el servidor.
+    #......................................................................
+    whats = WhatsappEchoClient("+56962365854", Message, keepAlive)     #Inicia el cliente para el envio de mensajes por WhatsApp.
+    whats.login(username, password)  
 
 
 print "|----------------------------------------------|\n";
