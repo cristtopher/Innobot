@@ -6,7 +6,6 @@ import Skype4Py
 import random
 import logging
 import sqlite3
-import random
 import base64
 from Examples.EchoClient import WhatsappEchoClient 
 
