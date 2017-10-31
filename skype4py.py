@@ -94,13 +94,13 @@ def knowledge(Name, User, Message, Date):
 
 
 def sendwhatapp(User, Message):
-    password = "xhB7OCqb2tFPR1dBBsE+pCQoECM="                      #Password dada al registrar el numero.
+    password = ""                      #Password dada al registrar el numero.
     password = base64.b64decode(bytes(password.encode('utf-8')))   #Codificacion de Password para envio a los servidores de whatsApp.
-    username = '56978783158'                                       #Numero de telefono para el inicio de secion.
+    username = ''                                       #Numero de telefono para el inicio de secion.
     keepAlive= False          
     Text = "%s -> %s" %(str(User), str(Message))                            #Conexion persistente con el servidor.
-    whats = WhatsappEchoClient("56962365854", Text, keepAlive)     #Inicia el cliente para el envio de mensajes por WhatsApp.
-    whats2 = WhatsappEchoClient("56951892025", Text, keepAlive)     #Inicia el cliente para el envio de mensajes por WhatsApp.
+    whats = WhatsappEchoClient("", Text, keepAlive)     #Inicia el cliente para el envio de mensajes por WhatsApp.
+    whats2 = WhatsappEchoClient("", Text, keepAlive)     #Inicia el cliente para el envio de mensajes por WhatsApp.
     print "Message sent to whatsApp"
     logging.info("Message sent to whatsApp")
     whats.login(username, password)
